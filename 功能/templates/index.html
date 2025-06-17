@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>Forge 控制面板</title>
+  <style>
+    body { font-family: Consolas, monospace; background: #1e1e1e; color: #dcdcdc; padding: 20px; }
+    button { margin: 10px; padding: 10px; }
+    pre { background: #2e2e2e; padding: 15px; max-height: 600px; overflow: auto; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <h1>Forge 控制面板</h1>
+  <button onclick="loadLog()">获取日志</button>
+  <button onclick="loadErrors()">提取错误</button>
+  <button onclick="analyzeErrors()">分析错误（DeepSeek）</button>
+
+  <pre id="output">点击上方按钮查看 Forge 输出日志</pre>
+
+  <script>
+    function loadLog() {
+      fetch("/get_log").then(r => r.json()).then(data => {
+        document.getElementById("output").textContent = data.log.join("\n");
+      });
+    }
+
+    function loadErrors() {
+      fetch("/get_errors").then(r => r.json()).then(data => {
+        document.getElementById("output").textContent = data.errors.join("\n");
+      });
+    }
+
+    function analyzeErrors() {
+      document.getElementById("output").textContent = "分析中，请稍候...";
+      fetch("/analyze_errors").then(r => r.json()).then(data => {
+        document.getElementById("output").innerHTML = marked.parse(data.result);
+      });
+    }
+
+    // 可选：每10秒自动刷新日志
+    //setInterval(loadLog, 1000);
+  </script>
+  <script>
+  let cooldown = 30; // 冷却时间（秒）
+  let cooldownTimer = null;
+
+  function loadLog() {
+    fetch("/get_log").then(r => r.json()).then(data => {
+      document.getElementById("output").textContent = data.log.join("\n");
+    });
+  }
+
+  function loadErrors() {
+    fetch("/get_errors").then(r => r.json()).then(data => {
+      document.getElementById("output").textContent = data.errors.join("\n");
+    });
+  }
+
+  function analyzeErrors() {
+    const button = document.querySelector("button[onclick='analyzeErrors()']");
+    if (button.disabled) return;
+
+    button.disabled = true;
+    let remaining = cooldown;
+    const originalText = "分析错误（DeepSeek）";
+    button.textContent = `冷却中（${remaining}s）`;
+
+    cooldownTimer = setInterval(() => {
+      remaining--;
+      if (remaining > 0) {
+        button.textContent = `冷却中（${remaining}s）`;
+      } else {
+        clearInterval(cooldownTimer);
+        button.textContent = originalText;
+        button.disabled = false;
+      }
+    }, 1000);
+
+    document.getElementById("output").textContent = "分析中，请稍候...";
+    fetch("/analyze_errors").then(r => r.json()).then(data => {
+      document.getElementById("output").innerHTML = marked.parse(data.result);
+    }).catch(err => {
+      document.getElementById("output").textContent = "请求出错：" + err;
+    });
+  }
+
+  // 可选：每10秒自动刷新日志
+  //setInterval(loadLog, 10000);
+</script>
+  <!-- 使用 CDN 引入 marked.js 渲染 Markdown -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</body>
+</html>
