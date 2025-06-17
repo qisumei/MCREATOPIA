@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 log_buffer = []
 max_lines = 200
-deepseek_api_key = "sk-a3efed7daec249a295e798e62c3d2eaf"  # 替换为你的密钥
+deepseek_api_key = ""  # 替换为你的密钥
 RESTART_TRIGGER_LINES = [
     "Dispatching unloading event for config universalbonemeal-server.toml",
     "Failed to encode packet 'clientbound/minecraft:custom_payload'",
