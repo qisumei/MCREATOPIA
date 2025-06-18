@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>服务器须知 - MCREATOPIA服务器</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <!-- 导航栏 -->
+  <header id="navbar">
+    <nav class="nav-container">
+      <a href="/">主页</a>
+      <a href="/whitelist">转正</a>
+      <a href="/rules">服务器须知</a>
+      <a href="/mods">模组介绍</a>
+      <a href="/guide">入服指南</a>
+      <a href="http://map.hiakuyo.top:21002" target="_blank">大地图</a>
+      <a href="/donate">赞助&鸣谢</a>
+    </nav>
+  </header>
+
+  <!-- 服务器须知 -->
+  <section class="rules-section">
+    <h1 class="section-title">服务器须知</h1>
+    <div class="rules-content">
+      <p>[占位文本：此处填写服务器须知内容]</p>
+      <p>请认真阅读以上内容，10秒后可继续。</p>
+    </div>
+    <a id="continue-btn" href="/login" class="start-button disabled">继续 (10s)</a>
+  </section>
+
+  <script src="/static/js/animation.js"></script>
+  <script>
+    let countdown = 10;
+    const btn = document.getElementById('continue-btn');
+    btn.innerText = `继续 (${countdown}s)`;
+
+    // 阻止禁用状态下的点击
+    btn.addEventListener('click', (e) => {
+      if (btn.classList.contains('disabled')) {
+        e.preventDefault();
+      }
+    });
+
+    const timer = setInterval(() => {
+      countdown--;
+      btn.innerText = `继续 (${countdown}s)`;
+      if (countdown <= 0) {
+        btn.innerText = '继续';
+        btn.classList.remove('disabled');
+        clearInterval(timer);
+      }
+    }, 1000);
+  </script>
+</body>
+</html>

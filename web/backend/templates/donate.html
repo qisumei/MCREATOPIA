@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>赞助&鸣谢 - MCREATOPIA服务器</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <!-- 导航栏 -->
+  <header id="navbar">
+    <nav class="nav-container">
+      <a href="/">主页</a>
+      <a href="/whitelist">转正</a>
+      <a href="/rules">服务器须知</a>
+      <a href="/mods">模组介绍</a>
+      <a href="/guide">入服指南</a>
+      <a href="http://map.hiakuyo.top:21002" target="_blank">大地图</a>
+      <a href="/donate">赞助&鸣谢</a>
+    </nav>
+  </header>
+
+  <!-- 特别鸣谢 -->
+  <section class="special-thanks">
+    <h1 class="section-title">特别鸣谢</h1>
+    <div class="thanks-grid">
+      <div class="thanks-card fade-in-left">特别鸣谢 1</div>
+      <div class="thanks-card fade-in-right">特别鸣谢 2</div>
+      <div class="thanks-card fade-in-left">[占位]</div>
+      <div class="thanks-card fade-in-right">[占位]</div>
+      <div class="thanks-card fade-in-left">[占位]</div>
+      <div class="thanks-card fade-in-right">[占位]</div>
+    </div>
+  </section>
+
+  <!-- 赞助名单 -->
+  <section class="sponsor-list">
+    <h1 class="section-title">赞助名单</h1>
+    <div class="sponsor-grid">
+      <!-- 8x4 网格，动态生成 -->
+      <script>
+        const grid = document.querySelector('.sponsor-grid');
+        for (let i = 0; i < 32; i++) {
+          const card = document.createElement('div');
+          card.className = 'sponsor-card fade-in-left';
+          card.innerText = `[赞助者 ${i + 1}]`;
+          grid.appendChild(card);
+        }
+      </script>
+    </div>
+  </section>
+
+  <script src="/static/js/animation.js"></script>
+</body>
+</html>

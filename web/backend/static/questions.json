@@ -1,0 +1,14 @@
+{
+  "questions": [
+    {
+      "question": "Minecraft中哪种方块可以用来制作信标？",
+      "options": ["石头", "玻璃", "铁块", "红石块"],
+      "correct": 2
+    },
+    {
+      "question": "以下哪个生物是中立型？",
+      "options": ["僵尸", "末影人", "苦力怕", "骷髅"],
+      "correct": 1
+    }
+  ]
+}

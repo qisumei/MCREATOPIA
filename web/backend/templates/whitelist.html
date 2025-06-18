@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>转正答题 - MCREATOPIA服务器</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <!-- 导航栏 -->
+  <header id="navbar">
+    <nav class="nav-container">
+      <a href="/">主页</a>
+      <a href="/whitelist">转正</a>
+      <a href="/rules">服务器须知</a>
+      <a href="/mods">模组介绍</a>
+      <a href="/guide">入服指南</a>
+      <a href="http://map.hiakuyo.top:21002" target="_blank">大地图</a>
+      <a href="/donate">赞助&鸣谢</a>
+    </nav>
+  </header>
+
+  <!-- 答题区域 -->
+  <section class="quiz-section">
+    <h1 class="section-title">转正答题</h1>
+    <div id="quiz-container"></div>
+    <button id="submit-btn" class="start-button">提交答案</button>
+    <div id="result" class="rules-content" style="display: none;"></div>
+  </section>
+
+  <script src="/static/js/animation.js"></script>
+  <script>
+    // 加载题库
+    fetch('/static/questions.json')
+      .then(response => response.json())
+      .then(data => {
+        const quizContainer = document.getElementById('quiz-container');
+        data.questions.forEach((q, index) => {
+          const questionDiv = document.createElement('div');
+          questionDiv.className = 'question-card';
+          questionDiv.innerHTML = `
+            <h3>问题 ${index + 1}: ${q.question}</h3>
+            ${q.options.map((opt, i) => `
+              <label><input type="radio" name="q${index}" value="${i}"> ${opt}</label><br>
+            `).join('')}
+          `;
+          quizContainer.appendChild(questionDiv);
+        });
+      });
+
+    // 提交答案
+    document.getElementById('submit-btn').addEventListener('click', () => {
+      fetch('/static/questions.json')
+        .then(response => response.json())
+        .then(data => {
+          let score = 0;
+          let wrongAnswers = [];
+          data.questions.forEach((q, index) => {
+            const selected = document.querySelector(`input[name="q${index}"]:checked`);
+            if (selected && parseInt(selected.value) === q.correct) {
+              score++;
+            } else {
+              wrongAnswers.push({
+                question: q.question,
+                selected: selected ? q.options[parseInt(selected.value)] : '未选择',
+                correct: q.options[q.correct]
+              });
+            }
+          });
+          const resultDiv = document.getElementById('result');
+          resultDiv.style.display = 'block';
+          if (score === 20) {
+            resultDiv.innerHTML = '<p>恭喜！满分通过，已加入白名单！</p>';
+            // TODO: 后端白名单对接
+          } else {
+            resultDiv.innerHTML = `
+              <p>得分：${score}/20</p>
+              <p>错题回顾：</p>
+              ${wrongAnswers.map(w => `
+                <div class="wrong-answer">
+                  <p>问题：${w.question}</p>
+                  <p class="wrong">你的答案：${w.selected}</p>
+                  <p class="correct">正确答案：${w.correct}</p>
+                </div>
+              `).join('')}
+              <p><a href="/whitelist" class="start-button">重新答题</a></p>
+            `;
+          }
+        });
+    });
+  </script>
+</body>
+</html>

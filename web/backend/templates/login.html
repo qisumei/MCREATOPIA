@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>登录/注册 - MCREATOPIA服务器</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <header id="navbar">
+    <nav class="nav-container">
+      <a href="/">主页</a>
+      <a href="/whitelist">转正</a>
+      <a href="/rules">服务器须知</a>
+      <a href="/mods">模组介绍</a>
+      <a href="/guide">入服指南</a>
+      <a href="http://map.hiakuyo.top:21002" target="_blank">大地图</a>
+      <a href="/donate">赞助&鸣谢</a>
+    </nav>
+  </header>
+
+  <section class="login-section">
+    <h1 class="section-title">登录/注册</h1>
+    <div class="form-container">
+      <div id="login-form" class="form-card">
+        <h2>登录</h2>
+        <form action="/login" method="POST">
+          <input type="text" name="username" placeholder="用户名" required>
+          <input type="password" name="password" placeholder="密码" required>
+          <button type="submit" class="start-button">登录</button>
+        </form>
+        <p><a href="#" onclick="toggleForm('register')">切换到注册</a></p>
+      </div>
+      <div id="register-form" class="form-card" style="display: none;">
+        <h2>注册</h2>
+        <form action="/register" method="POST">
+          <input type="text" name="game_id" placeholder="游戏ID" required>
+          <input type="text" name="username" placeholder="用户名" required>
+          <input type="password" name="password" placeholder="密码" required>
+          <input type="password" name="confirm_password" placeholder="确认密码" required>
+          <button type="submit" class="start-button">注册</button>
+        </form>
+        <p><a href="#" onclick="toggleForm('login')">切换到登录</a></p>
+      </div>
+    </div>
+  </section>
+
+  <script src="/static/js/animation.js"></script>
+  <script>
+    function toggleForm(form) {
+      const loginForm = document.getElementById('login-form');
+      const registerForm = document.getElementById('register-form');
+      if (form === 'login') {
+        loginForm.style.display = 'block';
+        registerForm.style.display = 'none';
+      } else {
+        loginForm.style.display = 'none';
+        registerForm.style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>
