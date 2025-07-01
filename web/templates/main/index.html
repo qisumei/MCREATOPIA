@@ -10,13 +10,13 @@
   <!-- 导航栏 -->
   <header id="navbar">
     <nav class="nav-container">
-      <a href="/">主页</a>
-      <a href="/whitelist">转正</a>
-      <a href="/rules">服务器须知</a>
-      <a href="/mods">模组介绍</a>
-      <a href="/guide">入服指南</a>
+      <a href="{{ url_for('main.index') }}">主页</a>
+      <a href="{{ url_for('whitelist.whitelist') }}">转正</a>
+      <a href="{{ url_for('main.rules') }}">服务器须知</a>
+      <a href="{{ url_for('main.mods') }}">模组介绍</a>
+      <a href="{{ url_for('main.guide') }}">入服指南</a>
       <a href="http://map.hiakuyo.top:21002" target="_blank">大地图</a>
-      <a href="/donate">赞助&鸣谢</a>
+      <a href="{{ url_for('main.donate') }}">赞助&鸣谢</a>
     </nav>
   </header>
 
@@ -45,7 +45,7 @@
 
   <!-- 开始按钮 -->
   <section class="start-section">
-    <a href="/rules" class="start-button">开始</a>
+    <a href="{{ url_for('main.rules') }}" class="start-button">开始</a>
   </section>
 
   <script src="/static/js/animation.js"></script>

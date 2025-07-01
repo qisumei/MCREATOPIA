@@ -9,13 +9,13 @@
 <body>
   <header id="navbar">
     <nav class="nav-container">
-      <a href="/">主页</a>
-      <a href="/whitelist">转正</a>
-      <a href="/rules">服务器须知</a>
-      <a href="/mods">模组介绍</a>
-      <a href="/guide">入服指南</a>
+      <a href="{{ url_for('main.index') }}">主页</a>
+      <a href="{{ url_for('whitelist.whitelist') }}">转正</a>
+      <a href="{{ url_for('main.rules') }}">服务器须知</a>
+      <a href="{{ url_for('main.mods') }}">模组介绍</a>
+      <a href="{{ url_for('main.guide') }}">入服指南</a>
       <a href="http://map.hiakuyo.top:21002" target="_blank">大地图</a>
-      <a href="/donate">赞助&鸣谢</a>
+      <a href="{{ url_for('main.donate') }}">赞助&鸣谢</a>
     </nav>
   </header>
 
@@ -24,7 +24,7 @@
     <div class="form-container">
       <div id="login-form" class="form-card">
         <h2>登录</h2>
-        <form action="/login" method="POST">
+        <form action="{{ url_for('auth.login') }}" method="POST">
           <input type="text" name="username" placeholder="用户名" required>
           <input type="password" name="password" placeholder="密码" required>
           <button type="submit" class="start-button">登录</button>
@@ -44,8 +44,13 @@
       </div>
     </div>
   </section>
-
-  <script src="/static/js/animation.js"></script>
+  <footer>
+    <div class="container">
+      <p>© 2025 MCREATOPIA Minecraft服务器. 保留所有权利.</p>
+      <p>这是一个非官方的Minecraft服务器，与Mojang或Microsoft无关.</p>
+    </div>
+  </footer>
+  <script src="{{ url_for('auth.register') }}"></script>
   <script>
     function toggleForm(form) {
       const loginForm = document.getElementById('login-form');
