@@ -377,7 +377,7 @@
       <button class="btn btn-danger" id="analyze-btn" onclick="analyzeErrors()">
         <i class="fas fa-robot"></i> AI分析错误
       </button>
-      <button class="btn btn-success" onclick="restartServer()">
+      <button id="start-status" class="btn btn-success" onclick="restartServer()">
         <i class="fas fa-power-off"></i> 重启服务器
       </button>
     </div>
@@ -464,7 +464,9 @@
       // 启动服务器状态轮询
       pollServerStatus();
     });
-    
+  function restartServer() {
+
+    }
     // 初始化自动刷新功能
     function initAutoRefresh() {
       const toggle = document.getElementById('auto-refresh-toggle');
@@ -713,20 +715,18 @@
     
     // 重启服务器
     function restartServer() {
-      if (confirm('确定要重启服务器吗？这将中断所有玩家的连接。')) {
-        fetch("/restart", { method: 'POST' })
-          .then(response => {
-            if (response.ok) {
-              alert('服务器重启命令已发送！');
-            } else {
-              alert('重启请求失败，请检查服务器状态');
-            }
-          })
-          .catch(err => {
-            console.error('重启请求失败:', err);
-            alert('重启请求失败，请检查控制台日志');
-          });
-      }
+      const statusDiv = document.getElementById('start-status');
+      statusDiv.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 启动中...';
+  
+      fetch("/restart")
+        .then(r => r.json())
+        .then(data => {
+          if (data.success) {
+            statusDiv.innerHTML = '<i class="fas fa-check"></i> 启动成功';
+          } else {
+            statusDiv.innerHTML = `<i class="fas fa-times"></i> 失败: ${data.reason}`;
+          }
+        })
     }
   </script>
 </body>

@@ -51,13 +51,46 @@ def is_server_running():
 def start_java_server():
     """启动服务器并记录PID"""
     global server_pid
+    
+    # 避免重复启动
+    if is_server_running():
+        app.logger.warning("服务器已在运行中，无需重复启动")
+        return False
+
     command = [
         "cmd", "/c", "start", "cmd", "/k",
         'java @user_jvm_args.txt @libraries/net/neoforged/neoforge/21.1.179/win_args.txt %* nogui'
     ]
-    proc = subprocess.Popen(command, shell=True)
-    server_pid = proc.pid
-    app.logger.info(f"Java服务器已启动 PID: {server_pid}")
+    
+    try:
+        # 环境变量验证
+        if not os.path.exists("user_jvm_args.txt"):
+            app.logger.error("启动失败：缺少 user_jvm_args.txt 配置文件")
+            return False
+            
+        # Java环境检测
+        java_check = subprocess.run(["java", "-version"], capture_output=True, text=True)
+        if java_check.returncode != 0:
+            app.logger.error("Java环境未配置或版本不兼容")
+            return False
+            
+        proc = subprocess.Popen(command, shell=True)
+        server_pid = proc.pid
+        
+        # 启动状态验证（等待5秒）
+        time.sleep(5)
+        if not is_server_running():
+            app.logger.error(f"启动失败 PID:{server_pid} 进程未持续运行")
+            server_pid = None
+            return False
+            
+        app.logger.info(f"Java服务器已启动 PID: {server_pid}")
+        return True
+        
+    except Exception as e:
+        app.logger.error(f"启动异常: {str(e)}")
+        server_pid = None
+        return False
 
 def terminate_server():
     """终止服务器进程 根据PID"""
