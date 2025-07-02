@@ -34,8 +34,6 @@ app.register_blueprint(main_bp)
 app.register_blueprint(whitelist_bp)
 
 init_db()
-@app.route('/test')
-def test():
-    return "应用程序配置正确！"
+
 if __name__ == '__main__':
     app.run(debug=True)

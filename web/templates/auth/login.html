@@ -33,7 +33,7 @@
       </div>
       <div id="register-form" class="form-card" style="display: none;">
         <h2>注册</h2>
-        <form action="/register" method="POST">
+        <form action="{{ url_for('auth.register') }}" method="POST">
           <input type="text" name="game_id" placeholder="游戏ID" required>
           <input type="text" name="username" placeholder="用户名" required>
           <input type="password" name="password" placeholder="密码" required>
