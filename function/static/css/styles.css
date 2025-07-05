@@ -1,0 +1,399 @@
+:root {
+    --minecraft-green: #55c755;
+    --dark-ui-bg: #1c1c1c;
+    --darker-ui-bg: #121212;
+    --highlight-green: #55c75588;
+    --panel-bg: rgba(40, 40, 40, 0.8);
+    --border-color: #333;
+    --text-color: #f0f0f0;
+    --text-muted: #aaa;
+}
+
+body {
+    background-color: #0f0f0f;
+    color: var(--text-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* 顶部状态栏 */
+.minecraft-header {
+    background: linear-gradient(45deg, #2c5f2d 0%, #1a3c27 100%);
+    border-bottom: 2px solid var(--minecraft-green);
+    color: white;
+    padding: 15px 0;
+    margin-bottom: 20px;
+    border-radius: 8px 8px 0 0;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.server-status {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.server-status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.server-running {
+    background-color: var(--minecraft-green);
+    color: #111;
+}
+
+.server-stopped {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.blinking {
+    animation: blinkingAnimation 1.5s infinite;
+}
+
+@keyframes blinkingAnimation {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* 服务器统计信息 */
+.server-stats {
+    background-color: var(--darker-ui-bg);
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color);
+}
+
+.stats-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.stat-item {
+    flex: 1;
+    min-width: 250px;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.stat-value {
+    font-size: 1.1rem;
+    margin: 5px 0;
+}
+
+.progress {
+    height: 8px;
+    background-color: #333;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 5px;
+}
+
+.progress-bar {
+    height: 100%;
+}
+
+.bg-success {
+    background-color: var(--minecraft-green);
+}
+
+.bg-info {
+    background-color: #3498db;
+}
+
+.bg-warning {
+    background-color: #f39c12;
+}
+
+.bg-danger {
+    background-color: #e74c3c;
+}
+
+/* 控制面板 */
+.control-panel {
+    background-color: var(--panel-bg);
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color);
+}
+
+.control-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    border: none;
+}
+
+.btn-mc {
+    background-color: var(--minecraft-green);
+    color: #111;
+}
+
+.btn-mc:hover {
+    background-color: #4ab54a;
+    color: #111;
+}
+
+.btn-warning {
+    background-color: #f39c12;
+    color: #111;
+}
+
+.btn-warning:hover {
+    background-color: #e67e22;
+    color: #111;
+}
+
+.btn-danger {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+    color: white;
+}
+
+.btn-outline-secondary {
+    background-color: transparent;
+    border: 1px solid #666;
+    color: var(--text-color);
+}
+
+.btn-outline-secondary:hover {
+    background-color: #333;
+    color: white;
+}
+
+.command-input {
+    display: flex;
+    flex-grow: 1;
+    margin-left: 10px;
+}
+
+.form-control {
+    background-color: var(--darker-ui-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 8px 12px;
+    flex-grow: 1;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--minecraft-green);
+    box-shadow: 0 0 0 0.2rem rgba(85, 199, 85, 0.25);
+}
+
+/* 控制台面板 */
+.console-panel {
+    background-color: var(--panel-bg);
+    padding: 20px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color);
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.log-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-check-input {
+    background-color: var(--darker-ui-bg);
+    border: 1px solid var(--border-color);
+}
+
+.form-check-input:checked {
+    background-color: var(--minecraft-green);
+    border-color: var(--minecraft-green);
+}
+
+.log-container {
+    background-color: black;
+    height: 500px;
+    overflow-y: auto;
+    font-family: monospace;
+    font-size: 14px;
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.log-line {
+    margin-bottom: 2px;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+.log-line:nth-child(odd) {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.log-line-error {
+    color: #e74c3c;
+    background-color: rgba(231, 76, 60, 0.1) !important;
+}
+
+.log-line-warn {
+    color: #f39c12;
+}
+
+.log-line-info {
+    color: #3498db;
+}
+
+.log-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pagination-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.pagination-info {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* 错误分析和AI面板 */
+.analysis-panel {
+    margin-bottom: 30px;
+}
+
+.error-panel, .ai-panel {
+    background-color: var(--panel-bg);
+    padding: 20px;
+    border-radius: 6px;
+    height: 100%;
+    border: 1px solid var(--border-color);
+}
+
+.error-panel {
+    border-left: 4px solid #e74c3c;
+}
+
+.ai-panel {
+    border-left: 4px solid #3498db;
+}
+
+.error-container {
+    background-color: rgba(231, 76, 60, 0.1);
+    padding: 10px;
+    border-radius: 4px;
+    max-height: 300px;
+    overflow-y: auto;
+    margin-top: 10px;
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+.analysis-container {
+    background-color: rgba(52, 152, 219, 0.1);
+    padding: 15px;
+    border-radius: 4px;
+    margin-top: 15px;
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+.panel-footer {
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* 页脚 */
+.footer {
+    text-align: center;
+    padding: 20px 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border-color);
+    margin-top: 30px;
+}
+
+/* 响应式设计 */
+@media (max-width: 992px) {
+    .stats-row {
+        flex-direction: column;
+    }
+    
+    .control-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .command-input {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .server-status {
+        margin-top: 10px;
+        align-items: flex-start;
+    }
+    
+    .log-footer {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+    
+    .pagination-info {
+        margin-top: 10px;
+    }
+}
