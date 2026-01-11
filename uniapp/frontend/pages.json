@@ -1,0 +1,50 @@
+{
+	"pages": [
+		// --- 新增的页面 ---
+			{
+				"path": "pages/index/index",
+				"style": { "navigationBarTitleText": "MCREATOPIA" }
+			},
+			{
+				"path": "pages/login/login",
+				"style": { "navigationBarTitleText": "登录 / 注册" }
+			},
+			{
+				"path": "pages/whitelist/quiz",
+				"style": { "navigationBarTitleText": "转正答题" }
+			},
+			{
+				"path": "pages/rules/rules",
+				"style": { "navigationBarTitleText": "服务器须知" }
+			},
+			{
+				"path": "pages/mods/mods",
+				"style": { "navigationBarTitleText": "模组介绍" }
+			},
+			{
+				"path": "pages/guide/guide",
+				"style": { "navigationBarTitleText": "入服指南" }
+			},
+			{
+				"path": "pages/donate/donate",
+				"style": { "navigationBarTitleText": "赞助鸣谢" }
+			},
+			{
+			"path": "pages/home/home",
+			"style": { 
+				"navigationBarTitleText": "管理控制台",
+				"navigationStyle": "custom"
+				}
+			}
+			],
+	
+	
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "M C T P",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"navigationStyle": "custom"
+	},
+	"uniIdRouter": {}
+}
